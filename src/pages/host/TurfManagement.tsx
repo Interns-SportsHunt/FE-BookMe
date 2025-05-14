@@ -40,7 +40,7 @@ import { format, parseISO } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { adaptVenue, adaptBookings } from "@/types/adapter";
 import { handle_apicall } from "@/services/apis/api_call";
-import { API_ROUTES, getApiUrl } from "@/services/utils";
+import { API_ROUTES, getApiUrl, ROUTES } from "@/services/utils";
 import AddBookingSlotDialog from "@/components/AddBookingSlotDialog";
 
 const TurfManagement = () => {
@@ -102,7 +102,7 @@ const TurfManagement = () => {
       title: "Turf Deleted",
       description: "The turf has been deleted successfully.",
     });
-    navigate(`/host/venue/${venueId}`);
+    navigate(`${ROUTES.HOST_VENUE}/${venueId}`);
   };
 
   const handleAddOfflineBooking = async (data: {
@@ -196,7 +196,7 @@ const TurfManagement = () => {
       <Button
         variant="ghost"
         className="mb-6"
-        onClick={() => navigate(`/host/venue/${venueId}`)}
+        onClick={() => navigate(`${ROUTES.HOST_VENUE}/${venueId}`)}
       >
         <ChevronLeft className="mr-2 h-4 w-4" /> Back to Venue
       </Button>

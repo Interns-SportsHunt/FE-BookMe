@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '@/services/auth';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { ROUTES } from '@/services/utils';
 
 interface User {
   id: string;
@@ -38,7 +39,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setServerDown(true);
         setError(new Error(response.error));
         if (location.pathname !== '/error') {
-          navigate('/error');
+          navigate(ROUTES.ERROR);
         }
         return;
       }
@@ -57,8 +58,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     } catch (err) {
       setError(err as Error);
       setServerDown(true);
-      if (location.pathname !== '/error') {
-        navigate('/error');
+      if (location.pathname !== ROUTES.ERROR) {
+        navigate(ROUTES.ERROR);
       }
     } finally {
       setLoading(false);
@@ -71,10 +72,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Prevent navigation to other routes if server is down
-    if (serverDown && location.pathname !== '/error') {
-      navigate('/error');
+    if (serverDown && location.pathname !== ROUTES.ERROR) {
+      navigate(ROUTES.ERROR);
     }
-  }, [serverDown, location.pathname]);
+  }, [serverDown, location.pathname, navigate]);
 
   const value = {
     user,

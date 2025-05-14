@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SportType } from "@/types";
 import { adaptVenues } from "@/types/adapter";
-import {API_ROUTES, getApiUrl} from "@/services/utils"
+import {API_ROUTES, getApiUrl, ROUTES} from "@/services/utils"
 import { handle_apicall } from "@/services/apis/api_call"
 
 const Home = () => {
@@ -41,7 +41,7 @@ const Home = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/venue-filter?query=${encodeURIComponent(searchQuery)}`);
+      navigate(`${ROUTES.VENUE_FILTER}?search=${encodeURIComponent(searchQuery)}`);
     }
   };
 
@@ -49,7 +49,7 @@ const Home = () => {
   const handleSportClick = (sport: string) => {
     // Convert sport name to match the sportType values in the data
     const sportType = sport.toLowerCase() as SportType;
-    navigate(`/venue-filter?sport=${encodeURIComponent(sportType)}`);
+    navigate(`${ROUTES.VENUE_FILTER}?sport=${encodeURIComponent(sportType)}`);
   };
 
   // Featured venues from API

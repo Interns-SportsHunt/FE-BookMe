@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/contexts/UserContext';
+import { ROUTES } from '@/services/utils';
 
 export default function ErrorPage() {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ export default function ErrorPage() {
   const handleRetry = async () => {
     try {
       await refetchUser();
-      navigate('/');
+      navigate(ROUTES.HOME);
     } catch (error) {
       console.error('Failed to refetch user:', error);
     }

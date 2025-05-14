@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import {ROUTES} from "@/services/utils";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Login = () => {
         title: "Login Successful",
         description: "Welcome back to SportsHunt!",
       });
-      navigate("/");
+      navigate(ROUTES.HOME);
     }, 1500);
   };
 
@@ -72,7 +73,7 @@ const Login = () => {
         title: "Registration Successful",
         description: "Your account has been created successfully!",
       });
-      navigate("/");
+      navigate(ROUTES.HOME);
     }, 1500);
   };
 

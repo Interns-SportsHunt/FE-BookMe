@@ -4,6 +4,7 @@ import HostNavbar from "@/components/HostNavbar";
 import { authService } from "@/services/auth";
 import { useEffect } from "react";
 import { useToast } from "@/hooks/use-toast"; // Import the custom hook
+import {ROUTES} from "@/services/utils";
 
 const HostLayout = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const HostLayout = () => {
           description: "You don't have host privileges.",
           variant: "destructive",
         });
-        navigate('/'); // Redirect to homepage
+        navigate(ROUTES.HOME); // Redirect to homepage
       }
     };
 

@@ -25,6 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { X } from "lucide-react"; // Fix the import
 import { venueService } from "@/services/venue";
+import {ROUTES} from "@/services/utils";
 
 const CreateVenue = () => {
   const navigate = useNavigate();
@@ -127,7 +128,7 @@ const CreateVenue = () => {
           description: "Your venue has been created successfully!",
         });
         // Redirect to the venue page using the venue ID from the response
-        navigate(`/venue/${response.data.id}`);
+        navigate(`${ROUTES.VENUE}/${response.data.id}`);
       } else {
         toast({
           title: "Error",
@@ -151,7 +152,7 @@ const CreateVenue = () => {
       <Button
         variant="ghost"
         className="mb-6"
-        onClick={() => navigate("/host/dashboard")}
+        onClick={() => navigate(ROUTES.HOST_DASHBOARD)}
       >
         <ChevronLeft className="mr-2 h-4 w-4" /> Back to Dashboard
       </Button>

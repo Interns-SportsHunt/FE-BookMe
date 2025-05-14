@@ -4,7 +4,7 @@ import { FootballIcon } from "@/utils/sportIcons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { API_ROUTES, getApiUrl } from "@/services/utils";
+import { API_ROUTES, getApiUrl, ROUTES } from "@/services/utils";
 import { useUser } from "../contexts/UserContext";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
@@ -21,7 +21,7 @@ const Navbar = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/venue-filter?query=${encodeURIComponent(searchQuery)}`);
+      navigate(`${ROUTES.VENUE_FILTER}?search=${encodeURIComponent(searchQuery)}`);
     }
   };
 

@@ -40,7 +40,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { format, parseISO } from "date-fns";
 import { handle_apicall } from "@/services/apis/api_call";
-import { API_ROUTES, getApiUrl } from "@/services/utils";
+import { API_ROUTES, getApiUrl, ROUTES } from "@/services/utils";
 
 const VenueManagement = () => {
   const { venueId } = useParams<{ venueId: string }>();
@@ -95,7 +95,7 @@ const VenueManagement = () => {
       title: "Venue Deleted",
       description: "The venue has been deleted successfully.",
     });
-    navigate("/host/dashboard");
+    navigate(ROUTES.HOST_DASHBOARD);
   };
 
   if (loading) {
@@ -128,7 +128,7 @@ const VenueManagement = () => {
       <Button
         variant="ghost"
         className="mb-6"
-        onClick={() => navigate("/host/dashboard")}
+        onClick={() => navigate(ROUTES.HOST_DASHBOARD)}
       >
         <ChevronLeft className="mr-2 h-4 w-4" /> Back to Dashboard
       </Button>

@@ -1,6 +1,7 @@
 const DEV_API_BASE_URL = "http://127.0.0.1:8000";
 const PROD_API_BASE_URL = "https://bookme.azurewebsites.net";
  
+// eslint-disable-next-line no-constant-condition
 export const API_BASE_URL = true ? PROD_API_BASE_URL : DEV_API_BASE_URL;
 
 
@@ -31,6 +32,16 @@ export const API_ROUTES = {
 
     }
 }
+
+export const ROUTES ={
+    HOME:"/",
+    VENUE_FILTER:"/venues/filter/",
+    VENUE:"/venues",
+    HOST_VENUE: "/host/venue",
+    HOST_DASHBOARD:"/host/dashboard",
+    ERROR: '/error',
+    UNAUTHORIZED: '/unauthorized',
+};
  
 export const getApiUrl = (route: string) => `${API_BASE_URL}/${route}`;
 

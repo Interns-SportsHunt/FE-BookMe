@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import {ROUTES} from "@/services/utils";
 
 const sportTypes = [
   { value: "football", label: "Football" },
@@ -224,7 +225,7 @@ const CreateTurf = () => {
         title: "Turf Created",
         description: "Your turf has been created successfully!",
       });
-      navigate(`/host/venue/${venueId}`);
+      navigate(`${ROUTES.HOST_VENUE}/${venueId}`);
     } catch (err: any) {
       toast({
         title: "Error",
@@ -266,7 +267,7 @@ const CreateTurf = () => {
       <Button
         variant="ghost"
         className="mb-6"
-        onClick={() => navigate(`/host/venue/${venueId}`)}
+        onClick={() => navigate(`${ROUTES.HOST_VENUE}/${venueId}`)}
       >
         <ChevronLeft className="mr-2 h-4 w-4" /> Back to Venue
       </Button>
