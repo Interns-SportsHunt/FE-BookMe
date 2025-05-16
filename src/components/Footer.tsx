@@ -79,9 +79,10 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/host/dashboard" className="text-gray-400 hover:text-sporty-500 transition-colors">
+                <a href="mailto: cto@sportshunt.in?subject=Host%20Request&body=Hi%20Team%2C%0A%0AI%20would%20like%20to%20become%20a%20host%20on%20Sporty%20Turf%20Hub.%20Please%20let%20me%20know%20the%20next%20steps.%0A%0AThanks%2C"
+                className="text-gray-400 hover:text-sporty-500 transition-colors">
                   Become a Host
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -133,14 +134,14 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-sporty-500 transition-colors">
-                  Privacy Policy
-                </a>
+                  <Link to="/privacy-policy" className="text-gray-400 hover:text-sporty-500 transition-colors">
+                    Privacy Policy
+                  </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-sporty-500 transition-colors">
-                  Terms of Service
-                </a>
+                 <Link to="/terms-and-conditions" className="text-gray-400 hover:text-sporty-500 transition-colors">
+                    Terms Of Service
+                  </Link>
               </li>
             </ul>
           </div>

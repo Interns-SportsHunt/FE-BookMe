@@ -19,6 +19,8 @@ import TurfDetails from "./pages/TurfDetails";
 import VenueFilter from "./pages/VenueFilter";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 // Auth Pages
 import Login from "./pages/auth/Login";
@@ -51,6 +53,8 @@ const App = () => (
             <Route path="venue/:venueId" element={<VenueDetails />} />
             <Route path="venue/:venueId/turf/:turfId" element={<TurfDetails />} />
             <Route path="profile" element={<UserProfile />} />
+            <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="terms-and-conditions" element={<TermsAndConditions/>}/>
           </Route>
 
           {/* Auth Routes */}

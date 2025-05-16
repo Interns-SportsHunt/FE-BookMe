@@ -225,11 +225,11 @@ const Home = () => {
               <p className="text-xl opacity-90 mb-6">
                 List your venue on SportsHunt and start earning. It's free to list and takes just a few minutes.
               </p>
-              <Link to="/host/create-venue">
+              <a href="mailto:cto@sportshunt.in?subject=Host%20Request&body=Hi%20Team%2C%0A%0AI%20am%20interested%20in%20becoming%20a%20host%20on%20SportHunt.%20Please%20share%20the%20next%20steps.%0A%0AThanks%2C">
                 <Button size="lg" className="bg-white text-sporty-700 hover:bg-gray-100">
                   Become a Host
                 </Button>
-              </Link>
+              </a>
             </div>
             <div className="md:w-1/3 flex justify-center">
               <img 
