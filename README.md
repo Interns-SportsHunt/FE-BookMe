@@ -1,56 +1,23 @@
-# Welcome to your Lovable project
+# SportsHunt (formerly BookMe) Frontend Application
 
-## Project info
+## Project Info
 
 **URL**: https://lovable.dev/projects/eab297fe-aaab-4b15-bad4-572f3ace2665
 
-## How can I edit this code?
+## How to Run This Application
 
-There are several ways of editing your application.
+Use one of these methods to start the development server:
 
-**Use Lovable**
+1. From the root directory:
+   - Run `start-app.bat` (Windows)
+   - Or run `npm run dev`
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/eab297fe-aaab-4b15-bad4-572f3ace2665) and start prompting.
+2. From the FE-BookMe directory:
+   - Run `npm run dev`
 
-Changes made via Lovable will be committed automatically to this repo.
+The application will be available at http://localhost:8080.
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technologies Used
 
 This project is built with:
 
@@ -60,27 +27,15 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Features
 
-Simply open [Lovable](https://lovable.dev/projects/eab297fe-aaab-4b15-bad4-572f3ace2665) and click on Share -> Publish.
+### Error Handling & Toast Notification System
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-
-# SportsHunt (BookMe) Frontend Application
-
-## Error Handling & Toast Notification System
-
-### Overview
+#### Overview
 
 This application includes a comprehensive error handling and toast notification system to provide consistent user feedback for both success and error states. The system automatically handles common error scenarios like network issues, server errors, and validation problems.
 
-### Key Components
+#### Key Components
 
 1. **Toast System (`src/hooks/use-toast.ts`)**
    - Provides a unified API for displaying notifications
@@ -160,19 +115,6 @@ const fetchData = async () => {
 };
 ```
 
-### Running the Application
-
-Use one of these methods to start the development server:
-
-1. From the root directory:
-   - Run `start-app.bat` (Windows)
-   - Or run `npm run dev`
-
-2. From the FE-BookMe directory:
-   - Run `npm run dev`
-
-The application will be available at http://localhost:8080.
-
 ### Testing Error Handling
 
 In development mode, the application includes a Toast Tester component on the home page:
@@ -186,3 +128,52 @@ In development mode, the application includes a Toast Tester component on the ho
 - **"Server not available" errors**: Check your internet connection and verify the API server is running
 - **Timeout errors**: The API call might be taking too long - check server performance
 - **Authentication errors**: Make sure you're logged in or your session hasn't expired
+
+## How to Edit This Code
+
+### Option 1: Use Lovable
+
+Simply visit the [Lovable Project](https://lovable.dev/projects/eab297fe-aaab-4b15-bad4-572f3ace2665) and start prompting.
+Changes made via Lovable will be committed automatically to this repo.
+
+### Option 2: Use your preferred IDE
+
+If you want to work locally using your own IDE, you can clone this repo and push changes:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
+
+### Option 3: Edit directly in GitHub
+
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
+
+### Option 4: Use GitHub Codespaces
+
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
+## Deployment
+
+Simply open [Lovable](https://lovable.dev/projects/eab297fe-aaab-4b15-bad4-572f3ace2665) and click on Share -> Publish.
+
+## Custom Domain
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
