@@ -1,4 +1,3 @@
-
 import React from "react";
 
 interface SportIconProps {
@@ -13,9 +12,12 @@ export const FootballIcon: React.FC<SportIconProps> = ({ className = "h-6 w-6", 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={sizeClass}>
       <circle cx="12" cy="12" r="10" />
-      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-10H2" />
-      <path d="m5 8 4 4" />
-      <path d="m15 8-4 4" />
+      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z" />
+      <path d="M4.93 4.93l4.24 4.24" />
+      <path d="M14.83 14.83l4.24 4.24" />
+      <path d="M14.83 9.17l4.24-4.24" />
+      <path d="M14.83 9.17l3.53-3.53" />
+      <path d="M4.93 19.07l4.24-4.24" />
     </svg>
   );
 };
@@ -27,10 +29,10 @@ export const BasketballIcon: React.FC<SportIconProps> = ({ className = "h-6 w-6"
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={sizeClass}>
       <circle cx="12" cy="12" r="10" />
-      <path d="M4.93 4.93A10 10 0 0 1 19.07 19.07" />
-      <path d="M4.93 19.07A10 10 0 0 1 19.07 4.93" />
-      <path d="M12 2a10 10 0 0 0 0 20" />
-      <path d="M12 22a10 10 0 0 0 0-20" />
+      <path d="M4.93 4.93L19.07 19.07" />
+      <path d="M19.07 4.93L4.93 19.07" />
+      <path d="M12 2v20" />
+      <path d="M2 12h20" />
     </svg>
   );
 };
@@ -42,11 +44,10 @@ export const CricketIcon: React.FC<SportIconProps> = ({ className = "h-6 w-6", s
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={sizeClass}>
       <path d="M12 22v-5" />
-      <path d="M9 8h6" />
-      <path d="M6 11v5" />
-      <path d="M18 11v5" />
-      <path d="M3 2h18v8H3z" />
-      <path d="M8 14h8" />
+      <path d="M9 8l3 3 3-3" />
+      <path d="M9 2v6l3 3 3-3V2" />
+      <path d="M3 10h6" />
+      <path d="M15 10h6" />
     </svg>
   );
 };
@@ -58,8 +59,8 @@ export const TennisIcon: React.FC<SportIconProps> = ({ className = "h-6 w-6", si
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={sizeClass}>
       <circle cx="12" cy="12" r="10" />
-      <path d="M18.09 13.5A8 8 0 1 0 14.5 18.1" />
-      <path d="M5.95 10.5A8 8 0 0 1 9.5 5.9" />
+      <path d="M18.09 5.91A8 8 0 0 0 5.91 18.09" />
+      <path d="M5.91 5.91A8 8 0 0 1 18.09 18.09" />
     </svg>
   );
 };
@@ -70,9 +71,10 @@ export const BadmintonIcon: React.FC<SportIconProps> = ({ className = "h-6 w-6",
   
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={sizeClass}>
-      <path d="M12 6v14" />
-      <path d="M6 10h12" />
-      <path d="m15 3 3 3-9 9-3-3z" />
+      <path d="M12 6v8l4 4" />
+      <path d="M12 14l-4 4" />
+      <path d="M12 2v4" />
+      <circle cx="12" cy="14" r="2" />
     </svg>
   );
 };
@@ -84,10 +86,10 @@ export const VolleyballIcon: React.FC<SportIconProps> = ({ className = "h-6 w-6"
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={sizeClass}>
       <circle cx="12" cy="12" r="10" />
-      <path d="M12 12a5 5 0 0 0 5 5" />
-      <path d="M12 12a5 5 0 0 1 5-5" />
-      <path d="M12 12a5 5 0 0 1-5 5" />
-      <path d="M12 12a5 5 0 0 0-5-5" />
+      <path d="M12 2v20" />
+      <path d="M2 12h20" />
+      <path d="M6 2l12 20" />
+      <path d="M18 2L6 22" />
     </svg>
   );
 };
@@ -99,8 +101,11 @@ export const SwimmingIcon: React.FC<SportIconProps> = ({ className = "h-6 w-6", 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={sizeClass}>
       <path d="M2 12h20" />
-      <path d="M5 8c.9-1 2.5-1 3.5 0s2.6 1 3.5 0 2.5-1 3.5 0 2.6 1 3.5 0" />
-      <path d="M5 16c.9-1 2.5-1 3.5 0s2.6 1 3.5 0 2.5-1 3.5 0 2.6 1 3.5 0" />
+      <path d="M5 9c0 1.5.5 2 2 3s2 2 2 3" />
+      <path d="M19 9c0 1.5-.5 2-2 3s-2 2-2 3" />
+      <path d="M12 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+      <path d="M4 22c1-5 2-6 6-6s5 1 6 6" />
+      <path d="M20 22c-1-5-2-6-6-6" />
     </svg>
   );
 };

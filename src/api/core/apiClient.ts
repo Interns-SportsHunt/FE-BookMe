@@ -1,32 +1,63 @@
+/**
+ * Core API Client
+ * 
+ * This module provides the foundational API client used throughout the application.
+ * It handles:
+ * - Request configuration
+ * - Response processing
+ * - Error handling with toast notifications
+ * - Timeout management
+ * - Standard response formatting
+ */
+
 import { config } from '@/config/env';
 import { handleApiError } from '@/utils/errorHandler';
 
 /**
  * Standard API response interface
- * Provides consistent structure for all API responses
  */
-interface ApiResponse<T = any> {
-  success: boolean;      // Whether the API call was successful
-  data: T | null;        // Response data (null if error)
-  error: any | null;     // Error information (null if success)
+export interface ApiResponse<T = any> {
+  success: boolean;
+  data: T | null;
+  error: any | null;
 }
 
 /**
- * Unified API call handler with integrated error handling
- * 
- * This function:
- * - Handles all API calls with consistent options
- * - Manages timeouts
- * - Processes responses
- * - Automatically displays error toasts
- * - Returns standardized response objects
+ * API Error information
  */
-export async function handle_apicall<T = any>(URL: string, options = {}): Promise<ApiResponse<T>> {
+interface ApiError {
+  status?: number;
+  message: string;
+  type?: string;
+  details?: any;
+}
+
+/**
+ * Core API request handler
+ * 
+ * @template T - The expected data type for successful responses
+ * @param {string} url - The endpoint URL to call
+ * @param {object} options - Additional fetch options to override defaults
+ * @returns {Promise<ApiResponse<T>>} - Promise with standardized response
+ * 
+ * @example
+ * // Basic GET request
+ * const data = await apiClient<UserData>('/api/user/profile');
+ * 
+ * @example
+ * // POST request with body
+ * const response = await apiClient('/api/venues', { 
+ *   method: 'POST',
+ *   body: JSON.stringify(newVenue) 
+ * });
+ */
+export async function apiClient<T = any>(url: string, options = {}): Promise<ApiResponse<T>> {
     try {
+        // Set up timeout management
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), config.api.timeout);
         
-        // Default options for all API requests - fixed TypeScript error with RequestCredentials
+        // Default options for all API requests
         const defaultOptions = {
             credentials: "include" as RequestCredentials,
             signal: controller.signal,
@@ -35,12 +66,14 @@ export async function handle_apicall<T = any>(URL: string, options = {}): Promis
             }
         };
         
-        const response = await fetch(URL, { ...defaultOptions, ...options });
+        // Make the network request
+        const response = await fetch(url, { ...defaultOptions, ...options });
         clearTimeout(timeoutId);
           
+        // Handle non-success responses
         if (!response.ok) {
-            // Enhanced error handling for non-2xx responses
-            const errorObj = {
+            // Create an error object with status code
+            const errorObj: ApiError = {
                 status: response.status,
                 message: `HTTP error! status: ${response.status}`
             };
@@ -53,7 +86,7 @@ export async function handle_apicall<T = any>(URL: string, options = {}): Promis
                 // If we can't parse the error response, just use the status code
             }
             
-            // Automatically show toast notification for the error
+            // Display error notification
             handleApiError(errorObj);
             
             return {
@@ -63,20 +96,21 @@ export async function handle_apicall<T = any>(URL: string, options = {}): Promis
             };
         }
         
+        // Process successful response
         const data = await response.json();
         return {
             success: true,
             data: data,
             error: null
         };
-    } catch (error) {
+    } catch (error: any) {
         console.error("API call error:", error);
         
-        // Special handling for different error types
+        // Handle specific error types appropriately
         
         // Timeout errors
         if (error.name === 'AbortError') {
-            const timeoutError = {
+            const timeoutError: ApiError = {
                 type: 'timeout',
                 message: 'Request timeout - please try again'
             };
@@ -89,9 +123,9 @@ export async function handle_apicall<T = any>(URL: string, options = {}): Promis
             };
         }
         
-        // Network errors - server not available
+        // Network errors (server not available)
         if (error.message === 'Failed to fetch') {
-            const networkError = {
+            const networkError: ApiError = {
                 type: 'network',
                 message: 'Unable to connect to the server. Please check your connection.'
             };
@@ -105,7 +139,7 @@ export async function handle_apicall<T = any>(URL: string, options = {}): Promis
         }
         
         // Generic error fallback
-        const genericError = {
+        const genericError: ApiError = {
             type: 'unknown',
             message: error instanceof Error ? error.message : 'An unexpected error occurred'
         };
@@ -118,3 +152,6 @@ export async function handle_apicall<T = any>(URL: string, options = {}): Promis
         };
     }
 }
+
+// Export alias for backward compatibility
+export const handle_apicall = apiClient; 

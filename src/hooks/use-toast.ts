@@ -1,4 +1,5 @@
 import * as React from "react"
+import { toast as sonnerToast } from "sonner"
 
 import type {
   ToastActionElement,
@@ -12,6 +13,16 @@ type ToasterToast = ToastProps & {
   id: string
   title?: React.ReactNode
   description?: React.ReactNode
+  action?: ToastActionElement
+}
+
+// Type for the toast function parameters
+// Added to fix TypeScript errors with description property
+// This ensures our toast function accepts title, description, and variant
+interface ToastOptions {
+  title?: React.ReactNode
+  description?: React.ReactNode
+  variant?: "default" | "destructive"
   action?: ToastActionElement
 }
 
@@ -139,7 +150,9 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">
 
-function toast({ ...props }: Toast) {
+// Modified toast function to use ToastOptions interface
+// This allows us to use description properly in toast notifications
+function toast(toastProps: Toast) {
   const id = genId()
 
   const update = (props: ToasterToast) =>
@@ -152,7 +165,7 @@ function toast({ ...props }: Toast) {
   dispatch({
     type: "ADD_TOAST",
     toast: {
-      ...props,
+      ...toastProps,
       id,
       open: true,
       onOpenChange: (open) => {
@@ -180,6 +193,18 @@ function useToast() {
       }
     }
   }, [state])
+
+  const toast = ({ title, description, variant = "default" }: ToastOptions) => {
+    if (variant === "destructive") {
+      return sonnerToast.error(title, {
+        description,
+      })
+    }
+
+    return sonnerToast(title, {
+      description,
+    })
+  }
 
   return {
     ...state,

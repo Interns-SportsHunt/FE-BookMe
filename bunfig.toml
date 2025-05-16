@@ -1,0 +1,39 @@
+# Bun configuration file (bunfig.toml)
+
+# Define default dependency scopes
+[install]
+# Install dependencies as exact versions by default
+exact = true
+# Enable peer dependencies to be installed automatically
+peer = true
+# Use the latest registry
+registry = "https://registry.npmjs.org"
+# Cache packages for faster installation
+cache = true
+
+# Define runtime settings
+[runtime]
+# Configure environment variables
+env_vars = ["NODE_ENV", "VITE_*"]
+# Allow watching for file changes
+watch = true
+# Enable source maps for better debugging
+source_maps = true
+
+# Test settings
+[test]
+# Configure test settings
+coverage = true
+# Include these file extensions in tests
+extensions = ["tsx", "ts", "jsx", "js"]
+
+# Package manager settings
+[package]
+type = "module"
+
+# Development server settings
+[dev]
+# Hot module reloading
+hmr = true
+# Port for dev server
+port = 8080 

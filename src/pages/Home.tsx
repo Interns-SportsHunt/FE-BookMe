@@ -3,13 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { FootballIcon, CricketIcon, BasketballIcon, TennisIcon, BadmintonIcon, VolleyballIcon } from "@/utils/sportIcons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { venues } from "@/data/mockData";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { SportType } from "@/types";
+import { SportType, Venue } from "@/types";
 import { adaptVenues } from "@/types/adapter";
-import {API_ROUTES, getApiUrl} from "@/services/utils"
-import { handle_apicall } from "@/services/apis/api_call"
+import ConfigTester from "@/components/ConfigTester";
+import ToastTester from "@/components/ToastTester";
+import { isDevelopment } from "@/config/env";
+
+// Import from the new API module instead of individual services and utils
+import { venueApi } from "@/api";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -53,13 +56,20 @@ const Home = () => {
   };
 
   // Featured venues from API
-  const [featuredVenues, setFeaturedVenues] = useState([]);
+  const [featuredVenues, setFeaturedVenues] = useState<Venue[]>([]);
 
   useEffect(() => {
+    /**
+     * Fetch featured venues using the new API module
+     * This is cleaner and easier to understand than direct API calls
+     */
     const fetchFeaturedVenues = async () => {
-      const data = await handle_apicall(getApiUrl(API_ROUTES.VENUE.FEATURED));
-      if (data.success) {
-        setFeaturedVenues(adaptVenues(data.data))
+      // Using the new venueApi.getFeatured method instead of raw API calls
+      const response = await venueApi.getFeatured();
+      
+      if (response.success && response.data) {
+        // Cast the response data to any to avoid type conflicts, then adapt to our app's Venue type
+        setFeaturedVenues(adaptVenues(response.data as any));
       }
     };
 
@@ -77,16 +87,26 @@ const Home = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="hero-gradient py-16 md:py-24">
-        <div className="container mx-auto px-4 text-center">
-          <div className="flex justify-center mb-6">
-            <FootballIcon className="h-16 w-16 text-white" />
+      {/* Only show ConfigTester in development mode */}
+      {isDevelopment() && (
+        <div className="container mx-auto px-4 py-4">
+          <ConfigTester />
+          <div className="mt-6">
+            <ToastTester />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+        </div>
+      )}
+      
+      {/* Hero Section */}
+      <section className="hero-gradient py-12 md:py-24">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex justify-center mb-4 md:mb-6">
+            <FootballIcon className="h-12 w-12 md:h-16 md:w-16 text-white" />
+          </div>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
             Find and Book Your Perfect Sports Venue
           </h1>
-          <p className="text-xl text-sporty-100 mb-8 max-w-3xl mx-auto">
+          <p className="text-base md:text-xl text-sporty-100 mb-6 md:mb-8 max-w-3xl mx-auto">
             Discover football fields, cricket grounds, basketball courts, and more. Book online in seconds.
           </p>
 
@@ -96,12 +116,12 @@ const Home = () => {
               placeholder="Search for venues..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 pr-4 py-6 text-lg rounded-full shadow-lg"
+              className="pl-10 pr-16 py-4 md:py-6 text-base md:text-lg rounded-full shadow-lg"
             />
-            <SearchIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400" />
+            <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 md:h-6 md:w-6 text-gray-400" />
             <Button 
               type="submit" 
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 rounded-full bg-sporty-600 hover:bg-sporty-700 text-white px-6 py-2"
+              className="absolute right-1 top-1/2 transform -translate-y-1/2 rounded-full bg-sporty-600 hover:bg-sporty-700 text-white px-3 md:px-6 py-1 md:py-2 text-sm md:text-base"
             >
               Search
             </Button>
@@ -110,20 +130,20 @@ const Home = () => {
       </section>
 
       {/* Sport Categories */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Browse by Sport</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">Browse by Sport</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {sportCategories.map((sport, index) => (
               <div 
                 key={index} 
-                className="flex flex-col items-center p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer"
+                className="flex flex-col items-center p-3 md:p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer"
                 onClick={() => handleSportClick(sport.name)}
               >
-                <div className={`${sport.color} h-16 w-16 rounded-full flex items-center justify-center text-white mb-4`}>
-                  <sport.icon className="h-8 w-8" />
+                <div className={`${sport.color} h-12 w-12 md:h-16 md:w-16 rounded-full flex items-center justify-center text-white mb-2 md:mb-4`}>
+                  <sport.icon className="h-6 w-6 md:h-8 md:w-8" />
                 </div>
-                <span className="font-medium">{sport.name}</span>
+                <span className="font-medium text-sm md:text-base text-center">{sport.name}</span>
               </div>
             ))}
           </div>
@@ -131,44 +151,44 @@ const Home = () => {
       </section>
 
       {/* Featured Venues */}
-      <section className="py-16">
+      <section className="py-10 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-between mb-10">
-            <h2 className="text-3xl font-bold">Featured Venues</h2>
-            <Link to="/venue-filter" className="text-sporty-600 hover:text-sporty-700 flex items-center">
-              View all venues <ArrowRightIcon className="ml-2 h-4 w-4" />
+          <div className="flex flex-wrap items-center justify-between mb-6 md:mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold">Featured Venues</h2>
+            <Link to="/venue-filter" className="text-sporty-600 hover:text-sporty-700 flex items-center text-sm md:text-base">
+              View all venues <ArrowRightIcon className="ml-1 md:ml-2 h-3 w-3 md:h-4 md:w-4" />
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {featuredVenues.map((venue) => (
               <Link to={`/venue/${venue.id}`} key={venue.id}>
-                <Card className="overflow-hidden card-hover">
-                  <div className="relative h-48 w-full">
+                <Card className="overflow-hidden card-hover h-full">
+                  <div className="relative h-40 md:h-48 w-full">
                     <img
                       src={venue.images[0]}
                       alt={venue.name}
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-3">
+                  <CardContent className="p-4 md:p-6">
+                    <div className="flex items-start justify-between mb-2 md:mb-3">
                       <div>
-                        <h3 className="text-xl font-bold">{venue.name}</h3>
+                        <h3 className="text-lg md:text-xl font-bold">{venue.name}</h3>
                         <div className="flex items-center text-gray-500 mt-1">
-                          <MapPinIcon className="h-4 w-4 mr-1" />
-                          <span className="text-sm">{venue.address}</span>
+                          <MapPinIcon className="h-3 w-3 md:h-4 md:w-4 mr-1" />
+                          <span className="text-xs md:text-sm truncate max-w-[200px]">{venue.address}</span>
                         </div>
                       </div>
-                      <Avatar className="h-10 w-10">
+                      <Avatar className="h-8 w-8 md:h-10 md:w-10">
                         <AvatarImage src={venue.host.profilePicture} />
                         <AvatarFallback>{venue.host.name.charAt(0)}</AvatarFallback>
                       </Avatar>
                     </div>
-                    <p className="text-gray-600 line-clamp-2 mb-4">{venue.description}</p>
+                    <p className="text-sm md:text-base text-gray-600 line-clamp-2 mb-3 md:mb-4">{venue.description}</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">{venue.turfs.length} Turfs Available</span>
-                      <Button size="sm" className="bg-sporty-600 hover:bg-sporty-700 text-white">
+                      <span className="text-xs md:text-sm text-gray-500">{venue.turfs.length} Turfs Available</span>
+                      <Button size="sm" className="bg-sporty-600 hover:bg-sporty-700 text-white text-xs md:text-sm py-1 px-2 md:px-3">
                         View Venue
                       </Button>
                     </div>
@@ -181,34 +201,34 @@ const Home = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <div className="text-center">
-              <div className="bg-sporty-100 h-20 w-20 rounded-full flex items-center justify-center text-sporty-600 text-2xl font-bold mx-auto mb-4">
+              <div className="bg-sporty-100 h-16 w-16 md:h-20 md:w-20 rounded-full flex items-center justify-center text-sporty-600 text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
                 1
               </div>
-              <h3 className="text-xl font-bold mb-3">Find a Venue</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Find a Venue</h3>
+              <p className="text-sm md:text-base text-gray-600">
                 Search for sports venues near you based on your preferred sport or location.
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-sporty-100 h-20 w-20 rounded-full flex items-center justify-center text-sporty-600 text-2xl font-bold mx-auto mb-4">
+              <div className="bg-sporty-100 h-16 w-16 md:h-20 md:w-20 rounded-full flex items-center justify-center text-sporty-600 text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
                 2
               </div>
-              <h3 className="text-xl font-bold mb-3">Book a Slot</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Book a Slot</h3>
+              <p className="text-sm md:text-base text-gray-600">
                 Choose your preferred date and time, and book instantly online.
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-sporty-100 h-20 w-20 rounded-full flex items-center justify-center text-sporty-600 text-2xl font-bold mx-auto mb-4">
+              <div className="bg-sporty-100 h-16 w-16 md:h-20 md:w-20 rounded-full flex items-center justify-center text-sporty-600 text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
                 3
               </div>
-              <h3 className="text-xl font-bold mb-3">Play & Enjoy</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Play & Enjoy</h3>
+              <p className="text-sm md:text-base text-gray-600">
                 Show up at the venue at your booked time and enjoy your game.
               </p>
             </div>
@@ -217,21 +237,21 @@ const Home = () => {
       </section>
 
       {/* Host CTA */}
-      <section className="py-16 bg-sporty-600 text-white">
+      <section className="py-10 md:py-16 bg-sporty-600 text-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="md:w-2/3 mb-8 md:mb-0">
-              <h2 className="text-3xl font-bold mb-4">Own a Sports Venue?</h2>
-              <p className="text-xl opacity-90 mb-6">
+            <div className="md:w-2/3 mb-6 md:mb-0">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Own a Sports Venue?</h2>
+              <p className="text-base md:text-xl opacity-90 mb-4 md:mb-6">
                 List your venue on SportsHunt and start earning. It's free to list and takes just a few minutes.
               </p>
               <Link to="/host/create-venue">
-                <Button size="lg" className="bg-white text-sporty-700 hover:bg-gray-100">
+                <Button size="lg" className="w-full md:w-auto bg-white text-sporty-700 hover:bg-gray-100 text-sm md:text-base py-2 px-4 md:px-6">
                   Become a Host
                 </Button>
               </Link>
             </div>
-            <div className="md:w-1/3 flex justify-center">
+            <div className="md:w-1/3 flex justify-center mt-4 md:mt-0">
               <img 
                 src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80" 
                 alt="Host a venue" 
