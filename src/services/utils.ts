@@ -29,7 +29,8 @@ export const API_ROUTES = {
         VENUE_BOOKINGS: "hosts/venue/{id}/bookings/",
         TURF_BOOKINGS: "hosts/turf/{id}/bookings/",
 
-    }
+    },
+    
 }
  
 export const getApiUrl = (route: string) => `${API_BASE_URL}/${route}`;

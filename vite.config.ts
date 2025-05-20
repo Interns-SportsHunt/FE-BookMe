@@ -25,5 +25,5 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false, // Set to true if needed in production
   },
   // Base path should be '/' for Azure Web App
-  base: '/'
+  base:"/",
 }));

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core User Routes -->
+  <url>
+    <loc>https://sportshunt.com/</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/venue-filter</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/venue/</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/venue/venue-id/turf/turf-id</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/profile</loc>
+  </url>
+
+  <!-- Auth Routes -->
+  <url>
+    <loc>https://sportshunt.com/login</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/logout</loc>
+  </url>
+
+  <!-- Host Routes -->
+  <url>
+    <loc>https://sportshunt.com/host/dashboard</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/host/create-venue</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/host/venue/venue-id</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/host/venue/venue-id/create-turf</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/host/venue/venue-id/turf/turf-id</loc>
+  </url>
+
+  <!-- Error Pages -->
+  <url>
+    <loc>https://sportshunt.com/error</loc>
+  </url>
+  <url>
+    <loc>https://sportshunt.com/404</loc>
+  </url>
+
+</urlset>

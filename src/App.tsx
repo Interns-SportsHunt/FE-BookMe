@@ -33,6 +33,7 @@ import TurfManagement from "./pages/host/TurfManagement";
 
 // Error Page
 import ErrorPage from "./pages/ErrorPage";
+import Mail from "./components/Mail";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="venue/:venueId" element={<VenueDetails />} />
             <Route path="venue/:venueId/turf/:turfId" element={<TurfDetails />} />
             <Route path="profile" element={<UserProfile />} />
+            <Route path="Createhost" element={<Mail/>} />
           </Route>
 
           {/* Auth Routes */}

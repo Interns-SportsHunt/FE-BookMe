@@ -1,14 +1,114 @@
+#Google
 User-agent: Googlebot
+User-agent: Googlebot-Mobile
+User-agent: Mediapartners-Google
+User-agent: AdsBot-Google
 Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
 
-User-agent: Bingbot
-Allow: /
-
+#Social-Media
 User-agent: Twitterbot
-Allow: /
-
 User-agent: facebookexternalhit
 Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
+
+#Other-browser
+User-agent: Bingbot
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
+
+#Russia
+User-agent: Yandex
+Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
+
+#China
+User-agent: Baiduspider
+Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
+
+#Safari
+User-agent: Applebot
+Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
+
+User-agent: redditbot
+Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
+
+User-agnet: SEMrushBot
+Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
+
+#Microsoft
+User-agent: Slurp
+User-agent: msnbot
+User-agent: adidxbot
+Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
 
 User-agent: *
+Sitemap: https://sportshunt/Sitemap.xml
 Allow: /
+Disallow: /login
+Disallow: /logout
+Disallow: /host
+Disallow: /host/*
+Disallow: /profile
+Disallow: /logout
+Disallow: /login
